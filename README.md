@@ -6,7 +6,6 @@ An end-to-end monthly HR MIS reporting workflow built with **Excel, VBA and Powe
 
 ![Power BI dashboard](screenshots/01_powerBI_dashboard.png)
 
-![Excel dashboard](screenshots/02_excel_dashboard.png)
 
 ## Why I built this
 
