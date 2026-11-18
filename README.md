@@ -84,6 +84,40 @@ hr-mis-reporting-pack/
 4. Use the **Select month** cell on `Summary` or `Dashboard` to change the month.
 5. Open the `.pbix` in Power BI Desktop and refresh it to read the updated workbook.
 
+
+## How to use it
+
+### Monthly update (adding a new month)
+
+1. **Prepare the new month's file.** Save it as `HR_MIS_YYYY_MM.xlsx` (for example `HR_MIS_2026_11.xlsx`). It must have the same columns as the earlier monthly files.
+2. **Update the employee master.** Add new joiners and exit dates to `employee_master.csv`. The macros use it to fill blank departments and locations and to correct exit dates.
+3. **Put both in one data folder.** Keep all monthly files and `employee_master.csv` together, with the new month's file added.
+4. **Open `HR_MIS_Report_Final.xlsm`** and click **Enable Content** so macros can run.
+5. **Run the full monthly update.** On the `Summary` sheet, click the update button. When asked, select the data folder and then `employee_master.csv`. The macro then:
+   - merges all monthly files into `Master_Data`
+   - cleans dates and department names
+   - validates the 5 data quality rules and logs each issue
+   - fixes the errors and writes every change to `Fix_Log`
+   - rebuilds the 5 report sheets, the Summary and the Excel dashboard
+6. **Check the results.** Open `DQ_Summary` to see how many issues were found and fixed, and compare the row count with the data you loaded.
+7. **Choose the month.** Use the **Select month** cell on `Summary` or `Dashboard` to view any month.
+8. **Save the workbook.** Power BI reads the saved file, so save before the next step.
+9. **Refresh Power BI.** Open `HR_MIS_Dashboard.pbix` and click **Refresh**. The new month appears in the slicer and in every chart.
+
+### Using the reports
+
+| Sheet | What to use it for |
+| --- | --- |
+| `Summary` | Month selector, headline KPIs, update and refresh buttons |
+| `Dashboard` | Excel dashboard: 4 KPI cards and 6 charts |
+| `R1_Headcount` to `R5_Leave` | The five detailed pivot reports |
+| `DQ_Summary` and `Fix_Log` | Audit trail of every data issue and fix |
+| `Master_Data` | Cleaned dataset behind all reports |
+
+### If Power BI cannot find the data
+In Power BI Desktop go to **Transform data → Data source settings**, select the Excel source, click **Change Source** and choose the saved `.xlsm` file again.
+
+
 ## What I learned
 
 - Validating data before reporting. The corrected figures only mean something if the checks are logged.
