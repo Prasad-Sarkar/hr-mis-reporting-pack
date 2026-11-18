@@ -4,7 +4,9 @@ An end-to-end monthly HR MIS reporting workflow built with **Excel, VBA and Powe
 
 > **All data is synthetic.** "Sample Services Pvt Ltd" is a fictional company. No real employee data is used.
 
-![Power BI dashboard](screenshots/powerbi_dashboard.png)
+![Power BI dashboard]
+![Uploading Screenshot_20261117_180806.png…]()
+
 
 ## Why I built this
 
