@@ -6,7 +6,6 @@ An end-to-end monthly HR MIS reporting workflow built with **Excel, VBA and Powe
 
 ![Power BI dashboard](screenshots/01_powerBI_dashboard.png)
 
-
 ## Why I built this
 
 HR MIS roles are about producing accurate recurring reports from messy employee data on a deadline. This project mirrors that work: take raw monthly files, find and fix data problems, calculate agreed KPIs, and deliver a dashboard that refreshes with one click.
@@ -25,7 +24,7 @@ HR MIS roles are about producing accurate recurring reports from messy employee 
 
 ## Data quality results
 
-Each monthly file contains deliberately planted errors (see `generate_hr_dataset.py`), so the validation macro can be checked against an answer key. All 156 were found.
+Each monthly file contains deliberately planted errors, listed in `raw_data/answer_key_injected_errors.csv`, so the validation macro can be checked against an answer key. All 156 were found.
 
 | Rule | Found | Action |
 | --- | --- | --- |
@@ -60,30 +59,20 @@ Each monthly file contains deliberately planted errors (see `generate_hr_dataset
 
 ## Tools
 
-Excel (PivotTables, conditional formatting, formulas), VBA (7 modules), Power BI (DAX measures), Python (pandas, to generate the dataset).
+Excel (PivotTables, conditional formatting, formulas), VBA (7 modules), Power BI (DAX measures), Python (pandas) was used to generate the synthetic dataset.
 
 ## Repository structure
 
 ```
 hr-mis-reporting-pack/
-├── data_raw/               synthetic employee master, 6 monthly extracts, error answer key
+├── raw_data/               synthetic employee master, 6 monthly extracts, error answer key
 ├── excel/                  HR_MIS_Report_Final.xlsm
-├── powerbi/                HR_MIS_Dashboard.pbix
+├── powerBI/                PowerBI_Dashboard.pbix
 ├── vba/                    exported VBA modules (.bas)
-├── docs/                   Report Requirement, workflow
-├── screenshots/            dashboard and report images
-├── generate_hr_dataset.py  creates the synthetic data
+├── docs/                   Report Requirement
+├── screenshots/            Power BI and Excel dashboard images
 └── README.md
 ```
-
-## How to use it
-
-1. Put the monthly files and `employee_master.csv` in one folder.
-2. Open `HR_MIS_Report_Final.xlsm` and enable macros.
-3. On the `Summary` sheet, click **Run full monthly update** and choose the data folder and the employee master when asked.
-4. Use the **Select month** cell on `Summary` or `Dashboard` to change the month.
-5. Open the `.pbix` in Power BI Desktop and refresh it to read the updated workbook.
-
 
 ## How to use it
 
@@ -93,7 +82,7 @@ hr-mis-reporting-pack/
 2. **Update the employee master.** Add new joiners and exit dates to `employee_master.csv`. The macros use it to fill blank departments and locations and to correct exit dates.
 3. **Put both in one data folder.** Keep all monthly files and `employee_master.csv` together, with the new month's file added.
 4. **Open `HR_MIS_Report_Final.xlsm`** and click **Enable Content** so macros can run.
-5. **Run the full monthly update.** On the `Summary` sheet, click the update button. When asked, select the data folder and then `employee_master.csv`. The macro then:
+5. **Run the full monthly update.** On the `Summary` sheet, click **Run full monthly update**. When asked, select the data folder and then `employee_master.csv`. The macro then:
    - merges all monthly files into `Master_Data`
    - cleans dates and department names
    - validates the 5 data quality rules and logs each issue
@@ -102,7 +91,7 @@ hr-mis-reporting-pack/
 6. **Check the results.** Open `DQ_Summary` to see how many issues were found and fixed, and compare the row count with the data you loaded.
 7. **Choose the month.** Use the **Select month** cell on `Summary` or `Dashboard` to view any month.
 8. **Save the workbook.** Power BI reads the saved file, so save before the next step.
-9. **Refresh Power BI.** Open `HR_MIS_Dashboard.pbix` and click **Refresh**. The new month appears in the slicer and in every chart.
+9. **Refresh Power BI.** Open `PowerBI_Dashboard.pbix` and click **Refresh**. The new month appears in the slicer and in every chart.
 
 ### Using the reports
 
@@ -115,8 +104,8 @@ hr-mis-reporting-pack/
 | `Master_Data` | Cleaned dataset behind all reports |
 
 ### If Power BI cannot find the data
-In Power BI Desktop go to **Transform data → Data source settings**, select the Excel source, click **Change Source** and choose the saved `.xlsm` file again.
 
+In Power BI Desktop go to **Transform data → Data source settings**, select the Excel source, click **Change Source** and choose the saved `.xlsm` file again.
 
 ## What I learned
 
